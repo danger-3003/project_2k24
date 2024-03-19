@@ -35,12 +35,11 @@ def voice_command_processor():
     with S.Microphone() as source:#accessing the primary microphone as the source
         recogniser.adjust_for_ambient_noise(source,duration=0.2)
         playsound("sounds/open.wav")
-        audio = recogniser.listen(source,phrase_time_limit=4)#listening continuously to the speech for 4 seconds
+        audio = recogniser.listen(source,phrase_time_limit=3)#listening continuously to the speech for 4 seconds
         text = ''#creating empty string to store the text converted form speech
         try:
             print("recognizing....")
             text=recogniser.recognize_google(audio)#using google speech recognition
-            playsound("sounds/close.wav")
             text=text.lower()#converting the text to lowercase
         except S.UnknownValueError as e:
             print(e)#printing the error if occured any
@@ -48,6 +47,7 @@ def voice_command_processor():
             speak("service is down.")
             print("service is down")
             return("service is down")
+        playsound("sounds/close.wav")
         return text.lower()
     
 #function to search for something

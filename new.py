@@ -28,7 +28,6 @@ import mediapipe as mp
 import pyautogui
 from math import dist
 import SpeechRecognition as S
-from playsound import playsound
 
 mp_hand_detector = mp.solutions.hands
 mp_draw = mp.solutions.drawing_utils
@@ -41,8 +40,8 @@ def position(point_name):
     # Get finger point number
     point_value = mp_hand_detector.HandLandmark[point_name].value
     # Get finger point position
-    point_position_x = int(hand_landmarks.landmark[point_value].x * screen_width)#getting finger point x cordinates
-    point_position_y = int(hand_landmarks.landmark[point_value].y * screen_height)#getting finger point y cordinates
+    point_position_x = int((hand_landmarks.landmark[point_value].x * frame_width)*screen_width/frame_width)#getting finger point x cordinates
+    point_position_y = int((hand_landmarks.landmark[point_value].y * frame_height)*screen_height/frame_height)#getting finger point y cordinates
 
     return ([point_position_x, point_position_y])
 
